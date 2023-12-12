@@ -1,0 +1,16 @@
+h1 {
+    color: red;
+}
+
+#gameboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* border: solid; */
+    height: 400px;
+    width: 400px;
+}
+
+.square {
+    border: 2px solid;
+    /* height: 25px; */
+}
