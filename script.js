@@ -57,12 +57,14 @@ const Game = (() => {
 
         if (checkForWinner(GameBoard.getGameboard(), players[currentPlayerIndex].symbol)) {
             gameOver = true
-            alert(`${players[currentPlayerIndex].symbol} is the winner!`)
+            alert(`${players[currentPlayerIndex].name} is the winner!`)
             gameReset(GameBoard.getGameboard())
+            showResult(players, currentPlayerIndex)
         } else if (checkForTie(GameBoard.getGameboard())) {
             gameOver = true
             alert("It is a tie")
             gameReset(GameBoard.getGameboard())
+            showResult()
         }
         currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0
     }
@@ -104,14 +106,22 @@ function checkForTie(board) {
     return board.every(cell => cell !== "")
 }
 
+const showResult = (players, currentPlayerIndex) => {
+    let resultHTML = '';
+    resultHTML = resultHTML += `<div> ${players[currentPlayerIndex].name} is the winner <button id="reset-button">Reset</button></div>`
+    document.querySelector("#endMessage").innerHTML = resultHTML;
+}
 
-const restartButton = document.querySelector("#reset-button");
-restartButton.addEventListener("click", () => {
+
+const resetButton = document.querySelector("#reset-button");
+resetButton.addEventListener("click", () => {
     Game.gameReset()
+    document.querySelector("#endMessage").innerHTML = ''
 })
 
 
 const startButton = document.querySelector('#start-button');
 startButton.addEventListener("click", () => {
     Game.start()
+
 })
