@@ -42,7 +42,7 @@ const Game = (() => {
         ]
         currentPlayerIndex = 0;
         gameOver = false
-        GameBoard.render();
+        GameBoard.render(gameReset(GameBoard.getGameboard()));
         const squares = document.querySelectorAll(".square");
         squares.forEach((square) => {
             square.addEventListener("click", handleClick)
@@ -57,13 +57,24 @@ const Game = (() => {
 
         if (checkForWinner(GameBoard.getGameboard(), players[currentPlayerIndex].symbol)) {
             gameOver = true
-            alert("winner")
+            alert(`${players[currentPlayerIndex].symbol} is the winner!`)
+            gameReset(GameBoard.getGameboard())
+        } else if (checkForTie(GameBoard.getGameboard())) {
+            gameOver = true
+            alert("It is a tie")
+            gameReset(GameBoard.getGameboard())
         }
-
         currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0
     }
+    const gameReset = () => {
+        for (let i = 0; i < 9; i++) {
+            GameBoard.update(i, '')
+        }
+        GameBoard.render()
+    }
+
     return {
-        start, handleClick
+        start, handleClick, gameReset
     }
 })();
 
@@ -83,12 +94,22 @@ function checkForWinner(board) {
     for (let i = 0; i < winningCombinations.length; i++) {
         const [a, b, c] = winningCombinations[i];
         if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-            console.log('winner')
             return true
         }
     }
     return false
 }
+
+function checkForTie(board) {
+    return board.every(cell => cell !== "")
+}
+
+
+const restartButton = document.querySelector("#reset-button");
+restartButton.addEventListener("click", () => {
+    Game.gameReset()
+})
+
 
 const startButton = document.querySelector('#start-button');
 startButton.addEventListener("click", () => {
