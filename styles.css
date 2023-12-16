@@ -1,16 +1,80 @@
-h1 {
-    color: red;
+body {
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    /* margin: 20px; */
 }
 
 #gameboard {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    /* border: solid; */
+    grid-template-rows: 1fr 1fr 1fr;
     height: 400px;
     width: 400px;
 }
 
 .square {
-    border: 2px solid;
-    /* height: 25px; */
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    border: 3px solid;
+    font-size: 100px;
+
+}
+
+.square:hover {
+    background-image: linear-gradient(rgb(0 0 0/10%) 0 0);
+}
+
+h1 {
+    font-size: 80px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
+    margin: 10px;
+}
+
+#results {
+    color: green;
+    font-size: 40px;
+    font-weight: 600;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 10px;
+}
+
+#tie {
+    color: black;
+    font-size: 40px;
+    font-weight: 600;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 10px;
+}
+
+input {
+    margin: 20px;
+    width: 150px;
+    height: 20px;
+
+}
+
+#buttons>button {
+    font-size: 15px;
+    border-radius: 10px;
+    border: 0px;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding: 10px;
+    color: white;
+    width: 125px;
+}
+
+#buttons>button:hover {
+    background-image: linear-gradient(rgb(0 0 0/15%) 0 0);
+}
+
+#start-button {
+    background-color: green;
+}
+
+#reset-button {
+    background-color: red;
 }
